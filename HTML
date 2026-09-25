@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joy Garden — Korean BBQ, Yakima WA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#171310;
+    --bg-alt:#1f1712;
+    --panel:#241b16;
+    --red:#a72a21;
+    --red-bright:#c9382c;
+    --gold:#c9a463;
+    --cream:#f3ece1;
+    --muted:#b7a89a;
+    --line:rgba(243,236,225,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--cream);
+    font-family:'Work Sans', Arial, sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Big Shoulders Display', Arial, sans-serif;
+    font-weight:800;
+    letter-spacing:0.01em;
+    line-height:0.95;
+    margin:0;
+    color:var(--cream);
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(23,19,16,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1080px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:34px;height:34px;background:var(--red);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Big Shoulders Display';font-weight:800;font-size:15px;color:var(--cream);
+    flex-shrink:0;
+  }
+  .brand-name{font-family:'Big Shoulders Display';font-weight:800;font-size:22px;letter-spacing:0.02em;}
+  nav.links{display:flex;gap:26px;font-size:14px;}
+  nav.links a{color:var(--muted);transition:color .15s;}
+  nav.links a:hover{color:var(--cream);}
+  .call-btn{
+    background:var(--red);color:var(--cream);padding:9px 18px;font-size:14px;font-weight:600;
+    border-radius:2px;white-space:nowrap;
+  }
+  .call-btn:hover{background:var(--red-bright);}
+  @media (max-width:720px){ nav.links{display:none;} }
+
+  /* Hero */
+  .hero{
+    position:relative;
+    min-height:78vh;
+    display:flex;align-items:flex-end;
+    background:linear-gradient(180deg, rgba(23,19,16,0.15) 0%, rgba(23,19,16,0.9) 92%), var(--bg-alt);
+    overflow:hidden;
+  }
+  .hero-photo{
+    position:absolute;inset:0;
+    background-image:url('images/hero.jpg');
+    background-size:cover;background-position:center;
+  }
+  .hero-photo::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(23,19,16,0.05) 0%, rgba(23,19,16,0.95) 90%);
+  }
+  .hero-inner{
+    position:relative;z-index:2;padding:0 24px 64px;max-width:1080px;margin:0 auto;width:100%;
+    animation:rise .8s ease-out both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  @media (prefers-reduced-motion:reduce){.hero-inner{animation:none;}}
+  .kicker{color:var(--gold);font-size:15px;font-weight:500;margin-bottom:10px;}
+  .hero h1{font-size:clamp(56px,10vw,124px);}
+  .hero p.sub{color:var(--muted);font-size:18px;max-width:520px;margin:16px 0 28px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{padding:13px 26px;font-size:14px;font-weight:600;border-radius:2px;display:inline-block;}
+  .btn-primary{background:var(--red);color:var(--cream);}
+  .btn-primary:hover{background:var(--red-bright);}
+  .btn-outline{border:1px solid var(--line);color:var(--cream);}
+  .btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* Section headings */
+  .section{padding:80px 0;}
+  .section-head{margin-bottom:36px;}
+  .section-head .kicker{margin-bottom:6px;}
+  .section-head h2{font-size:clamp(34px,5vw,52px);}
+  .section-alt{background:var(--bg-alt);}
+
+  /* Popular strip */
+  .popular-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .pop-card{position:relative;aspect-ratio:3/4;background:var(--panel);overflow:hidden;}
+  .pop-card img{width:100%;height:100%;object-fit:cover;}
+  .pop-label{
+    position:absolute;left:0;right:0;bottom:0;padding:14px 12px 12px;
+    background:linear-gradient(180deg, rgba(23,19,16,0) 0%, rgba(23,19,16,0.92) 75%);
+    font-family:'Big Shoulders Display';font-weight:700;font-size:19px;
+  }
+  .pop-tag{position:absolute;top:10px;left:10px;background:var(--red);color:var(--cream);font-size:11px;font-weight:600;padding:3px 8px;}
+  @media (max-width:820px){.popular-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* Menu */
+  .menu-note{color:var(--muted);font-size:15px;margin-bottom:36px;max-width:560px;}
+  .menu-cols{display:grid;grid-template-columns:1fr 1fr;gap:60px;}
+  @media (max-width:820px){.menu-cols{grid-template-columns:1fr;gap:44px;}}
+  .menu-group h3{font-family:'Big Shoulders Display';font-size:24px;color:var(--gold);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+  .menu-item{padding:16px 0;border-bottom:1px solid var(--line);}
+  .menu-item:last-child{border-bottom:none;}
+  .menu-item-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+  .menu-item-name{font-weight:600;font-size:17px;}
+  .menu-item-kr{color:var(--muted);font-weight:400;font-size:14px;margin-left:6px;}
+  .menu-item-price{font-weight:600;color:var(--gold);white-space:nowrap;font-size:16px;}
+  .menu-item-desc{color:var(--muted);font-size:14px;margin-top:4px;}
+  .spicy{color:var(--red-bright);font-weight:600;font-size:12px;letter-spacing:0.02em;}
+  .catering-banner{
+    margin-top:48px;padding:22px 26px;background:var(--panel);border-left:3px solid var(--red);
+    font-family:'Big Shoulders Display';font-size:20px;font-weight:600;color:var(--cream);
+  }
+
+  /* Reviews */
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:820px){.review-grid{grid-template-columns:1fr;}}
+  .review-card{background:var(--panel);padding:26px;border-top:2px solid var(--red);}
+  .review-card .stars{color:var(--gold);font-size:15px;letter-spacing:2px;margin-bottom:14px;}
+  .review-card blockquote{margin:0 0 16px;font-size:17px;line-height:1.5;color:var(--cream);font-weight:500;}
+  .review-card cite{color:var(--muted);font-size:13px;font-style:normal;}
+
+  /* Visit */
+  .visit-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;}
+  @media (max-width:820px){.visit-grid{grid-template-columns:1fr;}}
+  .info-block{margin-bottom:26px;}
+  .info-label{color:var(--gold);font-size:13px;font-weight:600;text-transform:none;margin-bottom:6px;}
+  .info-value{font-size:19px;}
+  .info-value a:hover{color:var(--gold);}
+  .map-photo{
+    background:var(--panel) url('images/storefront.jpg') center/cover;
+    min-height:320px;
+  }
+
+  footer{border-top:1px solid var(--line);padding:36px 0;color:var(--muted);font-size:13px;}
+  .footer-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-mark">JG</div>
+      <div class="brand-name">Joy Garden</div>
+    </div>
+    <nav class="links">
+      <a href="#menu">Menu</a>
+      <a href="#popular">Popular</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="call-btn" href="tel:+15099659544">Call to Order</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-inner">
+    <div class="kicker">Korean BBQ · Fruitvale Blvd, Yakima</div>
+    <h1>JOY<br>GARDEN</h1>
+    <p class="sub">Grilled bulgogi, stone-bowl bibimbap, and dumplings made in-house — a Korean table in the heart of Yakima.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="tel:+15099659544">Call (509) 965-9544</a>
+      <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=3710+Fruitvale+Blvd+Yakima+WA+98902" target="_blank" rel="noopener">Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="popular">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Guest favorites</div>
+      <h2>What people order</h2>
+    </div>
+    <div class="popular-grid">
+      <div class="pop-card">
+        <span class="pop-tag">Popular</span>
+        <img src="images/beef-bulgogi.jpg" alt="Beef Bulgogi" onerror="this.style.display='none'">
+        <div class="pop-label">Beef Bulgogi</div>
+      </div>
+      <div class="pop-card">
+        <span class="pop-tag">Popular</span>
+        <img src="images/dol-sot-bi-bim-bap.jpg" alt="Dol Sot Bi Bim Bap" onerror="this.style.display='none'">
+        <div class="pop-label">Dol Sot Bi Bim Bap</div>
+      </div>
+      <div class="pop-card">
+        <span class="pop-tag">Popular</span>
+        <img src="images/spicy-yuk-gae-jang.jpg" alt="Spicy Yuk Gae Jang" onerror="this.style.display='none'">
+        <div class="pop-label">Spicy Yuk Gae Jang</div>
+      </div>
+      <div class="pop-card">
+        <span class="pop-tag">Popular</span>
+        <img src="images/spicy-pork-bulgogi.jpg" alt="Spicy Pork Bulgogi" onerror="this.style.display='none'">
+        <div class="pop-label">Spicy Pork Bulgogi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Full menu</div>
+      <h2>Appetizers &amp; Entrees</h2>
+      <p class="menu-note">Every main entree is served with seasonal vegetable side dishes.</p>
+    </div>
+    <div class="menu-cols">
+      <div class="menu-group">
+        <h3>Appetizers</h3>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Eggrolls</span>
+            <span class="menu-item-price">2 for $6.95</span>
+          </div>
+          <div class="menu-item-desc">Deep-fried chicken and vegetable eggrolls</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Mandu <span class="menu-item-kr">만두</span></span>
+            <span class="menu-item-price">8 for $9.95</span>
+          </div>
+          <div class="menu-item-desc">Steamed Korean-style chicken &amp; vegetable dumplings (gyoza)</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Yaki Mandu <span class="menu-item-kr">야끼 만두</span></span>
+            <span class="menu-item-price">7 for $9.95</span>
+          </div>
+          <div class="menu-item-desc">Deep-fried Korean-style dumplings (gyoza)</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Shrimp Basket</span>
+            <span class="menu-item-price">$10.95</span>
+          </div>
+          <div class="menu-item-desc">Large deep-fried breaded shrimp</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Kim Bap <span class="menu-item-kr">김밥</span></span>
+            <span class="menu-item-price">$14.95</span>
+          </div>
+          <div class="menu-item-desc">Korean-style sushi roll with cooked beef, rice and vegetables wrapped in seaweed</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Calamari Tempura</span>
+            <span class="menu-item-price">$10.95</span>
+          </div>
+          <div class="menu-item-desc">Deep-fried slices of calamari dipped in tempura batter</div>
+        </div>
+
+        <div class="catering-banner">We cater — small and large groups. Ask for details.</div>
+      </div>
+
+      <div class="menu-group">
+        <h3>Main Entrees</h3>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Vegetarian Bi Bim Bap <span class="menu-item-kr">야채 비빔밥</span></span>
+            <span class="menu-item-price">$17.95</span>
+          </div>
+          <div class="menu-item-desc">Rice with seasonal vegetables &amp; egg, served in a cold bowl</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Chicken Teriyaki <span class="menu-item-kr">닭 구이</span></span>
+            <span class="menu-item-price">$16.95</span>
+          </div>
+          <div class="menu-item-desc">Grilled marinated chicken served with green salad and rice</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Don Katsu</span>
+            <span class="menu-item-price">$20.95</span>
+          </div>
+          <div class="menu-item-desc">Deep-fried pork cutlet with cabbage salad and rice</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Tteokbokki <span class="menu-item-kr">떡볶이</span> <span class="spicy">SPICY</span></span>
+            <span class="menu-item-price">$20.95</span>
+          </div>
+          <div class="menu-item-desc">Rice cakes and fish cake simmered in spicy gochujang chili paste</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Dol Sot Bi Bim Bap <span class="menu-item-kr">돌솥 비빔밥</span></span>
+            <span class="menu-item-price">$20.95</span>
+          </div>
+          <div class="menu-item-desc">Rice with shredded beef, vegetables &amp; egg, served in a heated stone bowl</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Garden Shrimp</span>
+            <span class="menu-item-price">$20.95</span>
+          </div>
+          <div class="menu-item-desc">Large steamed shrimp served with steamed vegetables and rice</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Beef Bulgogi <span class="menu-item-kr">소 불고기</span></span>
+            <span class="menu-item-price">$20.95</span>
+          </div>
+          <div class="menu-item-desc">Grilled thinly sliced marinated beef and vegetables, served with rice</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Pork Bulgogi <span class="menu-item-kr">돼지 불고기</span> <span class="spicy">SPICY</span></span>
+            <span class="menu-item-price">$20.95</span>
+          </div>
+          <div class="menu-item-desc">Grilled thinly sliced marinated pork and vegetables, served with rice</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Chicken Bulgogi <span class="menu-item-kr">닭 불고기</span></span>
+            <span class="menu-item-price">$20.95</span>
+          </div>
+          <div class="menu-item-desc">Sliced chicken breast with vegetables, served with rice</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Grilled Salmon Platter <span class="menu-item-kr">연어 백반</span></span>
+            <span class="menu-item-price">$20.95</span>
+          </div>
+          <div class="menu-item-desc">Salmon grilled to perfection, served with salad and rice</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Calamari Stir-Fry <span class="menu-item-kr">오징어 볶음</span> <span class="spicy">SPICY</span></span>
+            <span class="menu-item-price">$21.95</span>
+          </div>
+          <div class="menu-item-desc">Pacific calamari stir-fried with vegetables, served with rice</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">Galbi <span class="menu-item-kr">갈비</span></span>
+            <span class="menu-item-price">$27.95</span>
+          </div>
+          <div class="menu-item-desc">Grilled marinated beef short ribs, served with rice</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-row">
+            <span class="menu-item-name">K-BBQ Chicken <span class="spicy">SPICY</span></span>
+            <span class="menu-item-price">$20.95</span>
+          </div>
+          <div class="menu-item-desc">Deep-fried boneless chicken with garlic spicy soy sauce and Korean pepper, served with cabbage salad, pickled radish, and rice</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">On Google</div>
+      <h2>What guests are saying</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"A diamond in the rough! I could not believe a delicious Korean restaurant would be in Yakima — and they serve sushi and pho too."</blockquote>
+        <cite>— Kaskaa, Local Guide</cite>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★☆</div>
+        <blockquote>"The food was absolutely fantastic. Korean offerings I hadn't seen since Seoul — the Bi Bim Bop and Korean BBQ chicken were both excellent."</blockquote>
+        <cite>— Dusty Arenson</cite>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"If you're going to Yakima, please stop by and have a good meal of jjambong and sushi. All the food is delicious!"</blockquote>
+        <cite>— Toby Song, Local Guide</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="visit">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Plan your visit</div>
+      <h2>Find us on Fruitvale</h2>
+    </div>
+    <div class="visit-grid">
+      <div>
+        <div class="info-block">
+          <div class="info-label">Address</div>
+          <div class="info-value">3710 Fruitvale Blvd<br>Yakima, WA 98902</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Phone</div>
+          <div class="info-value"><a href="tel:+15099659544">(509) 965-9544</a></div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Hours</div>
+          <div class="info-value">Open daily — see phone or Facebook for current hours</div>
+        </div>
+        <div class="hero-ctas" style="margin-top:22px;">
+          <a class="btn btn-primary" href="tel:+15099659544">Call to Order</a>
+          <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=3710+Fruitvale+Blvd+Yakima+WA+98902" target="_blank" rel="noopener">Get Directions</a>
+        </div>
+      </div>
+      <div class="map-photo"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>Joy Garden · Korean BBQ Restaurant · Yakima, WA</span>
+    <span>(509) 965-9544</span>
+  </div>
+</footer>
+
+</body>
+</html>
